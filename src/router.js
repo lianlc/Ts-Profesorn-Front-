@@ -1,14 +1,17 @@
-import { Routes, Route, BrowserRouter } from "react-router-dom";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import mainLoader from "./loaders/main";
 import Main from "./Pages/Main";
 
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <Main />,
+    loader: mainLoader,
+  },
+]);
+
 const AppRouter = () => {
-  return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<Main />} />
-      </Routes>
-    </BrowserRouter>
-  );
+  return <RouterProvider router={router} />;
 };
 
 export default AppRouter;

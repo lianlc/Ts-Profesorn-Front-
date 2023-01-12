@@ -1,6 +1,9 @@
+import React from "react";
+import { useLoaderData, Await } from "react-router-dom";
 import Loading from "../components/Loading";
 
 export default function Main() {
+  const data = useLoaderData();
   return (
     <div className="isolate bg-white">
       <div className="absolute inset-x-0 top-[-10rem] -z-10 transform-gpu overflow-hidden blur-3xl sm:top-[-22rem]">
@@ -47,7 +50,18 @@ export default function Main() {
                 <h1 className="text-3xl font-bold tracking-tight sm:text-center sm:text-6xl">
                   Profesor de TypeScript
                 </h1>
-                <Loading />
+                {/* <Loading /> */}
+
+                <React.Suspense fallback={<Loading />}>
+                  <Await resolve={data.errorData} errorElement={<p>error</p>}>
+                    {(errorData) => {
+                      console.log({ errorData });
+
+                      return <p>yei</p>;
+                    }}
+                  </Await>
+                </React.Suspense>
+
                 <p className="mt-6 text-lg leading-8 text-gray-600 sm:text-center">
                   {/* yolo */}{" "}
                 </p>
